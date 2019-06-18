@@ -32,11 +32,10 @@
 
 .menu_list {
   padding: 0;
+  display: flex;
+  flex-flow: column;
 }
-.menu_list ul {
-  padding: 0;
-}
-.menu_list li {
+.menu_item {
   list-style: none;
   line-height: 2rem;
 }

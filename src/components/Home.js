@@ -1,7 +1,7 @@
-import React from 'react';
-import hero from '../images/hero2.png';
-import styled from 'styled-components';
-import bg from '../images/main-bg4.svg';
+import React from "react";
+import hero from "../images/hero2.png";
+import styled from "styled-components";
+import bg from "../images/main-bg4.svg";
 
 const HomeStyle = styled.div`
   width: 100%;
@@ -21,6 +21,12 @@ const HomeStyle = styled.div`
   & .hero > img {
     width: 100%;
     height: 100%;
+  }
+
+  @media screen and (min-width: 1920px) {
+    & .hero {
+      max-width: 110rem;
+    }
   }
 `;
 

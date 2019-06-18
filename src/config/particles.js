@@ -1,10 +1,10 @@
 const particlesOptions = {
   particles: {
     number: { value: 220, density: { enable: true, value_area: 800 } },
-    color: { value: '#ffffff' },
+    color: { value: "#ffffff" },
     shape: {
-      type: 'circle',
-      stroke: { width: 0, color: '#ffff' },
+      type: "circle",
+      stroke: { width: 0, color: "#ffff" },
       polygon: { nb_sides: 5 }
     },
     opacity: {
@@ -23,10 +23,10 @@ const particlesOptions = {
     move: {
       enable: true,
       speed: 1,
-      direction: 'none',
+      direction: "none",
       random: true,
       straight: false,
-      out_mode: 'out',
+      out_mode: "out",
       bounce: false,
       attract: { enable: false, rotateX: 600, rotateY: 600 }
     }
