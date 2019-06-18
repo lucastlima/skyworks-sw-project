@@ -1,33 +1,47 @@
-.App {
-  text-align: center;
+.particlejs {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -2;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.wrapper {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2rem;
+  height: 90%;
+  width: 90%;
+  overflow: auto;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.wrapper::-webkit-scrollbar {
+  display: none;
 }
 
-.App-link {
-  color: #61dafb;
+.logo {
+  position: absolute;
+  width: 3rem;
+  margin: 3rem 3rem 0;
+  z-index: 5;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menu_list {
+  padding: 0;
+}
+.menu_list ul {
+  padding: 0;
+}
+.menu_list li {
+  list-style: none;
+  line-height: 2rem;
+}
+.menu_list a {
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
 }

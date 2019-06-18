@@ -1,63 +1,73 @@
-import React from 'react';
-import Particles from 'react-particles-js';
+import React, { useState } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import People from './components/People';
+import Particles from 'react-particles-js';
+import particlesOptions from './config/particles';
+import menu from './images/res-emp-logo.svg';
+import './App.css';
+import { Trail } from 'react-spring/renderprops';
+//import People from './components/People';
+import Home from './components/Home';
 
 function App() {
   const client = new ApolloClient({
     uri: 'https://skyworks-sw-project.herokuapp.com/'
   });
 
-  const particlesOptions = {
-    particles: {
-      number: { value: 160, density: { enable: true, value_area: 800 } },
-      color: { value: '#ffffff' },
-      shape: {
-        type: 'circle',
-        stroke: { width: 0, color: '#000000' },
-        polygon: { nb_sides: 5 },
-        image: { src: 'img/github.svg', width: 100, height: 100 }
-      },
-      opacity: {
-        value: 1,
-        random: true,
-        anim: { enable: true, speed: 1, opacity_min: 0, sync: false }
-      },
-      size: {
-        value: 3,
-        random: true,
-        anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
-      },
-      line_linked: {
-        enable: false,
-        distance: 150,
-        color: '#ffffff',
-        opacity: 0.4,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 1,
-        direction: 'none',
-        random: true,
-        straight: false,
-        out_mode: 'out',
-        bounce: false,
-        attract: { enable: false, rotateX: 600, rotateY: 600 }
-      }
+  const [isOpen, setMenu] = useState(false);
+
+  const menuItems = [
+    {
+      id: 0,
+      title: 'People'
     },
-    retina_detect: true
-  };
+    {
+      id: 1,
+      title: 'Films'
+    },
+    {
+      id: 2,
+      title: 'Species'
+    },
+    {
+      id: 3,
+      title: 'Vehicles'
+    },
+    {
+      id: 4,
+      title: 'Starships'
+    }
+  ];
 
   return (
     <ApolloProvider client={client}>
-      <Particles params={particlesOptions}>
-        <div>
-          <h2>Star Wars</h2>
+      <Particles className="particlejs" params={particlesOptions} />
+      <div className="wrapper">
+        <div className="logo">
+          <img src={menu} alt="Menu" onClick={() => setMenu(!isOpen)} />
+          <nav className="menu_nav">
+            <ul className="menu_list">
+              <Trail
+                items={menuItems}
+                reverse={isOpen}
+                initial={null}
+                keys={item => item.id}
+                from={{ opacity: 0, transform: 'translate3d(0,0px,0)' }}
+                to={{
+                  opacity: isOpen ? 0 : 1,
+                  transform: isOpen
+                    ? 'translate3d(0,-4rem,0)'
+                    : 'translate3d(0,0px,0)'
+                }}
+              >
+                {item => props => <li style={props}>{item.title}</li>}
+              </Trail>
+            </ul>
+          </nav>
         </div>
-        <People />
-      </Particles>
+        <Home />
+        {/* <People /> */}
+      </div>
     </ApolloProvider>
   );
 }
