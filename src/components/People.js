@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { request } from "graphql-request";
-import PeopleDetails from "./subcomponents/PeopleDetails";
+import PersonDetails from "./subcomponents/PersonDetails";
 import styled from "styled-components";
 
 const PStyle = styled.div`
@@ -10,14 +10,10 @@ const PStyle = styled.div`
   flex: 1;
   height: 100%;
   justify-content: left;
-  padding: 10rem;
+  padding: 5rem 5rem 5rem 9rem;
 
   & > * {
     margin-left: 2rem;
-    /* background-color: rgba(0, 0, 0, 0.5); */
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
-    border-radius: 0.5rem;
   }
 
   & .pplList::-webkit-scrollbar {
@@ -30,9 +26,12 @@ const PStyle = styled.div`
     flex-flow: column;
     width: 20rem;
     min-width: 10rem;
-    height: 50rem;
+    height: 100%;
     overflow: auto;
     padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
+    border-radius: 0.5rem;
   }
 
   & .pplList ul {
@@ -65,9 +64,7 @@ const PStyle = styled.div`
     color: white;
   }
   & .details {
-    height: fit-content;
-    width: 30rem;
-    padding: 1rem 2rem;
+    flex: 1;
   }
 `;
 
@@ -86,15 +83,15 @@ const pplQuery = `
 
 const People = () => {
   const [pplData, setPplData] = useState([]);
-  const [inputValue, setInput] = useState("");
-  const [target, setTarget] = useState("cGVvcGxlOjE=");
+  const [inputValueP, setInputP] = useState("");
+  const [targetP, setTargetP] = useState("cGVvcGxlOjE=");
 
   const handleChange = event => {
-    setInput(event.target.value);
+    setInputP(event.target.value);
   };
 
   const handleSelection = el => {
-    setTarget(el.target.id);
+    setTargetP(el.target.id);
   };
 
   useEffect(() => {
@@ -104,15 +101,15 @@ const People = () => {
   }, []);
 
   let filterData = pplData.filter(
-    el => el.node.name.indexOf(inputValue) !== -1
+    el => el.node.name.indexOf(inputValueP) !== -1
   );
 
   return (
     <PStyle>
-      <div className="pplList">
+      <div className="pplList" key="peoplePanel">
         <ul>
           <div className="searchbox">
-            <input value={inputValue} type="text" onChange={handleChange} />
+            <input value={inputValueP} type="text" onChange={handleChange} />
           </div>
           {filterData.map(({ node }) => (
             <li key={node.id} id={node.id} onClick={handleSelection}>
@@ -122,7 +119,7 @@ const People = () => {
         </ul>
       </div>
       <div className="details">
-        <PeopleDetails target={target} />
+        <PersonDetails target={targetP} />
       </div>
     </PStyle>
   );

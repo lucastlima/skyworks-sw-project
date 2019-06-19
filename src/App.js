@@ -36,7 +36,10 @@ function App() {
                   reverse={isOpen}
                   initial={null}
                   keys={item => item.id}
-                  from={{ opacity: 0, transform: "translate3d(0,-1rem,0)" }}
+                  from={{
+                    opacity: 0,
+                    transform: "translate3d(0,-1rem,0)"
+                  }}
                   to={{
                     opacity: isOpen ? 0 : 1,
                     transform: isOpen

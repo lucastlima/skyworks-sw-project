@@ -2,20 +2,35 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import uuid from "uuid/v4";
 
 const PdStyle = styled.div`
-  display: flex;
-  flex: 1;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-template-columns: repeat(2, 20rem);
+  grid-auto-flow: row;
+  grid-gap: 1rem;
+  align-items: flex-start;
   & span {
     font-weight: bold;
   }
   & p {
     text-transform: capitalize;
   }
+  & .detailsBlock {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
+    border-radius: 0.5rem;
+    padding: 1rem 2rem 2rem;
+    overflow-y: auto;
+  }
+  & .detailsBlock h1 {
+    margin: 0;
+  }
 `;
 
-function PeopleDetails({ target }) {
+function PersonDetails({ target }) {
   useEffect(() => {}, [target]);
 
   const [personData, setPerson] = useState([]);
@@ -30,6 +45,7 @@ function PeopleDetails({ target }) {
             eyeColor
             height
             mass
+            gender
             skinColor
             species {
                 id
@@ -62,7 +78,7 @@ function PeopleDetails({ target }) {
 
   return (
     <PdStyle>
-      <Query query={GET_PERSON}>
+      <Query query={GET_PERSON} pollInterval={500}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
@@ -79,10 +95,13 @@ function PeopleDetails({ target }) {
               species,
               skinColor,
               mass,
-              eyeColor
+              gender,
+              eyeColor,
+              filmConnection,
+              starshipConnection
             }) => (
               <React.Fragment>
-                <div key={id}>
+                <div className="detailsBlock" key={uuid()}>
                   <h1>{name}</h1>
                   <p>
                     <span>Homeworld: </span>
@@ -91,6 +110,9 @@ function PeopleDetails({ target }) {
                   <p>
                     <span>Specie: </span>
                     {species ? [species].map(e => e.name) : "N/A"}
+                  </p>
+                  <p>
+                    <span>Gender: </span> {gender}
                   </p>
                   <p>
                     <span>Birth Year: </span> {birthYear}
@@ -108,6 +130,30 @@ function PeopleDetails({ target }) {
                     <span>Mass: </span> {mass === null ? "N/A" : mass}
                   </p>
                 </div>
+                <div className="detailsBlock" key={uuid()}>
+                  <h1>Films</h1>
+                  {filmConnection ? (
+                    filmConnection.edges.map(({ node }) => (
+                      <p>
+                        <span>Title: </span> {node.title}
+                      </p>
+                    ))
+                  ) : (
+                    <h1>Test</h1>
+                  )}
+                </div>
+                <div className="detailsBlock" key={uuid()}>
+                  <h1>Starships</h1>
+                  {starshipConnection ? (
+                    starshipConnection.edges.map(({ node }) => (
+                      <p>
+                        <span>Name: </span> {node.name}
+                      </p>
+                    ))
+                  ) : (
+                    <h1>Test</h1>
+                  )}
+                </div>
               </React.Fragment>
             )
           );
@@ -117,4 +163,4 @@ function PeopleDetails({ target }) {
   );
 }
 
-export default PeopleDetails;
+export default PersonDetails;
