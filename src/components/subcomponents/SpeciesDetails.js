@@ -65,7 +65,7 @@ function SpeciesDetail({ target }) {
 
   return (
     <SpDetailsStyle>
-      <Query query={GET_SPECIE} pollInterval={500}>
+      <Query query={GET_SPECIE}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;

@@ -49,7 +49,7 @@ function FilmsDetails({ target }) {
 
   return (
     <FilmsDtStyle>
-      <Query query={GET_FILM} pollInterval={500}>
+      <Query query={GET_FILM}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;

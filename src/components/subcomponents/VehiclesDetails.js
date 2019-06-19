@@ -63,7 +63,7 @@ function VehiclesDetail({ target }) {
 
   return (
     <VhDetailsStyle>
-      <Query query={GET_VEHICLE} pollInterval={500}>
+      <Query query={GET_VEHICLE}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
