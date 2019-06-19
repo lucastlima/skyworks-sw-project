@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import gql from "graphql-tag";
-import { Query } from "react-apollo";
-import uuid from "uuid/v4";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import uuid from 'uuid/v4';
 
 const FilmsDtStyle = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ function FilmsDetails({ target }) {
     <FilmsDtStyle>
       <Query query={GET_FILM} pollInterval={500}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
           setFilmData(data.film);
           console.log(data.film);
