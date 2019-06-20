@@ -27,7 +27,6 @@ const SpDetailsStyle = styled.div`
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
     border-radius: 0.5rem;
     padding: 1rem 2rem 2rem;
-    overflow-y: auto;
   }
   & .detailsBlock h1,
   h3 {

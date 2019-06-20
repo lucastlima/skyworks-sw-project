@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { request } from "graphql-request";
 import PersonDetails from "./subcomponents/PersonDetails";
 import styled from "styled-components";
 import uuid from "uuid/v4";
@@ -7,21 +6,17 @@ import uuid from "uuid/v4";
 const PStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
   display: flex;
-  flex-flow: row;
-  flex: 1;
-  height: 100%;
-  justify-content: left;
+  flex-flow: row; /*Fine*/
+  flex: 1; /*Fine*/
   padding: 5rem 5rem 5rem 9rem;
 
   & > * {
     margin-left: 2rem;
   }
-
   & .pplList::-webkit-scrollbar {
     display: none;
     border-radius: 0.5rem;
   }
-
   & .pplList {
     display: flex;
     flex-flow: column;
@@ -34,14 +29,12 @@ const PStyle = styled.div`
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
     border-radius: 0.5rem;
   }
-
   & .pplList ul {
     padding: 0;
     display: flex;
     flex-flow: column wrap;
     margin: 0;
   }
-
   & .pplList li {
     margin-bottom: 0.5rem;
     padding: 0.5rem;
@@ -51,7 +44,6 @@ const PStyle = styled.div`
     border: 0.1rem solid var(--color5);
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
   }
-
   & .searchbox input {
     border: none;
     background-color: rgba(255, 255, 255, 0.1);
@@ -64,28 +56,17 @@ const PStyle = styled.div`
     padding: 0 0.5rem;
     color: white;
   }
-  & .details {
+  & .detailsContainer {
+    display: flex;
     flex: 1;
+    overflow: auto;
   }
 `;
 
-const pplQuery = `
-  query {
-    allPeople {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
-
-const People = () => {
-  const [pplData, setPplData] = useState([]);
+const People = ({ data }) => {
+  const [peopleData, setPeopleData] = useState([]);
   const [inputValueP, setInputP] = useState("");
-  const [targetP, setTargetP] = useState("cGVvcGxlOjE=");
+  const [targetP, setTargetP] = useState(false);
 
   const handleChange = event => {
     setInputP(event.target.value);
@@ -95,18 +76,20 @@ const People = () => {
     setTargetP(el.target.id);
   };
 
+  console.log(targetP);
+
   useEffect(() => {
-    request("https://skyworks-sw-project.herokuapp.com/", pplQuery)
-      .then(data => setPplData(data.allPeople.edges))
-      .catch(err => console.error(err));
+    if (data) {
+      setPeopleData(data.edges);
+    }
   }, []);
 
-  let filterData = pplData.filter(
+  let filterData = peopleData.filter(
     el => el.node.name.indexOf(inputValueP) !== -1
   );
 
   return (
-    <PStyle key={uuid()}>
+    <PStyle key="peopleData">
       <div className="pplList" key="peoplePanel">
         <ul>
           <div className="searchbox">
@@ -119,7 +102,9 @@ const People = () => {
           ))}
         </ul>
       </div>
-      <PersonDetails target={targetP} key={uuid()} />
+      <div className="detailsContainer">
+        <PersonDetails target={targetP} peopleData={filterData} key={uuid()} />
+      </div>
     </PStyle>
   );
 };

@@ -7,13 +7,13 @@
 
 .wrapper {
   position: relative;
+  display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 2rem;
   height: 90%;
   width: 90%;
-  overflow: auto;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }

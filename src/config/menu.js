@@ -2,32 +2,32 @@ const menuItems = [
   {
     id: 0,
     title: "Home",
-    to: "/"
+    to: "home"
   },
   {
     id: 1,
     title: "People",
-    to: "/people"
+    to: "people"
   },
   {
     id: 2,
     title: "Films",
-    to: "/films"
+    to: "films"
   },
   {
     id: 3,
     title: "Species",
-    to: "/species"
+    to: "species"
   },
   {
     id: 4,
     title: "Vehicles",
-    to: "/vehicles"
+    to: "vehicles"
   },
   {
     id: 5,
     title: "Starships",
-    to: "/starships"
+    to: "starships"
   }
 ];
 
