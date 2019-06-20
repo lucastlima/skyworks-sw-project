@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { request } from 'graphql-request';
-import PersonDetails from './subcomponents/PersonDetails';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { request } from "graphql-request";
+import PersonDetails from "./subcomponents/PersonDetails";
+import styled from "styled-components";
 
 const PStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -83,8 +83,8 @@ const pplQuery = `
 
 const People = () => {
   const [pplData, setPplData] = useState([]);
-  const [inputValueP, setInputP] = useState('');
-  const [targetP, setTargetP] = useState('cGVvcGxlOjE=');
+  const [inputValueP, setInputP] = useState("");
+  const [targetP, setTargetP] = useState("cGVvcGxlOjE=");
 
   const handleChange = event => {
     setInputP(event.target.value);
@@ -95,7 +95,7 @@ const People = () => {
   };
 
   useEffect(() => {
-    request('https://skyworks-sw-project.herokuapp.com/', pplQuery)
+    request("https://skyworks-sw-project.herokuapp.com/", pplQuery)
       .then(data => setPplData(data.allPeople.edges))
       .catch(err => console.error(err));
   }, []);
@@ -118,9 +118,7 @@ const People = () => {
           ))}
         </ul>
       </div>
-      <div className="details">
-        <PersonDetails target={targetP} />
-      </div>
+      <PersonDetails target={targetP} />
     </PStyle>
   );
 };

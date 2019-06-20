@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { request } from 'graphql-request';
-import VehiclesDetails from './subcomponents/VehiclesDetails';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { request } from "graphql-request";
+import VehiclesDetails from "./subcomponents/VehiclesDetails";
+import styled from "styled-components";
 
 const VehicleStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -83,8 +83,8 @@ const vehicleQuery = `
 
 const Vehicle = () => {
   const [vehicleData, setVehicleData] = useState([]);
-  const [inputValueV, setInputV] = useState('');
-  const [targetV, setTargetV] = useState('dmVoaWNsZXM6NA==');
+  const [inputValueV, setInputV] = useState("");
+  const [targetV, setTargetV] = useState("dmVoaWNsZXM6NA==");
 
   const handleChange = event => {
     setInputV(event.target.value);
@@ -95,7 +95,7 @@ const Vehicle = () => {
   };
 
   useEffect(() => {
-    request('https://skyworks-sw-project.herokuapp.com/', vehicleQuery)
+    request("https://skyworks-sw-project.herokuapp.com/", vehicleQuery)
       .then(data => setVehicleData(data.allVehicles.edges))
       .catch(err => console.error(err));
   }, []);
@@ -118,9 +118,7 @@ const Vehicle = () => {
           ))}
         </ul>
       </div>
-      <div className="details">
-        <VehiclesDetails target={targetV} />
-      </div>
+      <VehiclesDetails target={targetV} />
     </VehicleStyle>
   );
 };

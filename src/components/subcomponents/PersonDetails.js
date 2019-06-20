@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
-import uuid from 'uuid/v4';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import uuid from "uuid/v4";
 
 const PdStyle = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
+  flex-flow: column wrap;
+
   & span {
     font-weight: bold;
   }
@@ -20,11 +20,9 @@ const PdStyle = styled.div`
     display: flex;
     white-space: nowrap;
     flex-flow: column wrap;
-    max-width: fit-content;
-    min-width: fit-content;
+    flex: 0 min-content;
     margin-bottom: 1rem;
     margin-left: 1rem;
-    flex: 1;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
     border-radius: 0.5rem;
@@ -87,7 +85,7 @@ function PersonDetails({ target }) {
     <PdStyle>
       <Query query={GET_PERSON}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
           setPerson(data.person);
           console.log(data.person);
@@ -112,11 +110,11 @@ function PersonDetails({ target }) {
                   <h2>{name}</h2>
                   <p>
                     <span>Homeworld: </span>
-                    {homeworld ? [homeworld].map(e => e.name) : ''}
+                    {homeworld ? [homeworld].map(e => e.name) : ""}
                   </p>
                   <p>
                     <span>Specie: </span>
-                    {species ? [species].map(e => e.name) : 'N/A'}
+                    {species ? [species].map(e => e.name) : "N/A"}
                   </p>
                   <p>
                     <span>Gender: </span> {gender}
@@ -134,7 +132,7 @@ function PersonDetails({ target }) {
                     <span>Skin Color: </span> {skinColor}
                   </p>
                   <p>
-                    <span>Mass: </span> {mass === null ? 'N/A' : mass}
+                    <span>Mass: </span> {mass === null ? "N/A" : mass}
                   </p>
                 </div>
                 <div className="detailsBlock" key={uuid()}>

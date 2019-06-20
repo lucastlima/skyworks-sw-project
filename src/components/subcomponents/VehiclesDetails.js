@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 const VhDetailsStyle = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
 
   & span {
     font-weight: bold;
@@ -19,11 +19,9 @@ const VhDetailsStyle = styled.div`
     display: flex;
     white-space: nowrap;
     flex-flow: column wrap;
-    max-width: fit-content;
-    min-width: fit-content;
+    flex: 0 min-content;
     margin-bottom: 1rem;
     margin-left: 1rem;
-    flex: 1;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.9);
     border-radius: 0.5rem;
@@ -65,7 +63,7 @@ function VehiclesDetail({ target }) {
     <VhDetailsStyle>
       <Query query={GET_VEHICLE}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
           setVehicleData(data.vehicle);
 

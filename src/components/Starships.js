@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { request } from 'graphql-request';
-import StarshipDetails from './subcomponents/StarshipDetails';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { request } from "graphql-request";
+import StarshipDetails from "./subcomponents/StarshipDetails";
+import styled from "styled-components";
 
 const StarshipStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -83,8 +83,8 @@ const starshipsQuery = `
 
 const Startship = () => {
   const [starshipData, setStarshipData] = useState([]);
-  const [inputValueSs, setInputSs] = useState('');
-  const [targetSs, setTargetSs] = useState('c3RhcnNoaXBzOjI=');
+  const [inputValueSs, setInputSs] = useState("");
+  const [targetSs, setTargetSs] = useState("c3RhcnNoaXBzOjI=");
 
   const handleChange = event => {
     setInputSs(event.target.value);
@@ -95,7 +95,7 @@ const Startship = () => {
   };
 
   useEffect(() => {
-    request('https://skyworks-sw-project.herokuapp.com/', starshipsQuery)
+    request("https://skyworks-sw-project.herokuapp.com/", starshipsQuery)
       .then(data => setStarshipData(data.allStarships.edges))
       .catch(err => console.error(err));
   }, []);
@@ -118,9 +118,7 @@ const Startship = () => {
           ))}
         </ul>
       </div>
-      <div className="details">
-        <StarshipDetails target={targetSs} />
-      </div>
+      <StarshipDetails target={targetSs} />
     </StarshipStyle>
   );
 };

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { request } from 'graphql-request';
-import SpeciesDetails from './subcomponents/SpeciesDetails';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { request } from "graphql-request";
+import SpeciesDetails from "./subcomponents/SpeciesDetails";
+import styled from "styled-components";
 
 const SpecieStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -83,8 +83,8 @@ const speciesQuery = `
 
 const Species = () => {
   const [specieData, setSpecieData] = useState([]);
-  const [inputValueSp, setInputSp] = useState('');
-  const [targetSp, setTargetSp] = useState('cGVvcGxlOjE=');
+  const [inputValueSp, setInputSp] = useState("");
+  const [targetSp, setTargetSp] = useState("cGVvcGxlOjE=");
 
   const handleChange = event => {
     setInputSp(event.target.value);
@@ -95,7 +95,7 @@ const Species = () => {
   };
 
   useEffect(() => {
-    request('https://skyworks-sw-project.herokuapp.com/', speciesQuery)
+    request("https://skyworks-sw-project.herokuapp.com/", speciesQuery)
       .then(data => setSpecieData(data.allSpecies.edges))
       .catch(err => console.error(err));
   }, []);
@@ -118,9 +118,7 @@ const Species = () => {
           ))}
         </ul>
       </div>
-      <div className="details">
-        <SpeciesDetails target={targetSp} />
-      </div>
+      <SpeciesDetails target={targetSp} />
     </SpecieStyle>
   );
 };
