@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { request } from "graphql-request";
 import SpeciesDetails from "./subcomponents/SpeciesDetails";
 import styled from "styled-components";
+import uuid from "uuid/v4";
 
 const SpecieStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -105,7 +106,7 @@ const Species = () => {
   );
 
   return (
-    <SpecieStyle>
+    <SpecieStyle key={uuid()}>
       <div className="specieList" key="speciePanel">
         <ul>
           <div className="searchbox">
@@ -118,7 +119,7 @@ const Species = () => {
           ))}
         </ul>
       </div>
-      <SpeciesDetails target={targetSp} />
+      <SpeciesDetails target={targetSp} key={uuid()} />
     </SpecieStyle>
   );
 };

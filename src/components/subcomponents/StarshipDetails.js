@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import uuid from "uuid/v4";
 
 const SsDetailsStyle = styled.div`
   display: flex;
@@ -85,47 +86,45 @@ function StarshipDetail({ target }) {
               cargoCapacity,
               consumables
             }) => (
-              <React.Fragment>
-                <div className="detailsBlock" key={id}>
-                  <h1>{name}</h1>
-                  <p>
-                    <span>Model: </span> {model}
-                  </p>
-                  <p>
-                    <span>Starship Class: </span> {starshipClass}
-                  </p>
-                  <p>
-                    <span>Manufacturers: </span> {manufacturers}
-                  </p>
-                  <p>
-                    <span>Cost In Credits: </span> {costInCredits}
-                  </p>
-                  <p>
-                    <span>Length: </span> {length}
-                  </p>
-                  <p>
-                    <span>Crew: </span> {crew}
-                  </p>
-                  <p>
-                    <span>Passengers: </span> {passengers}
-                  </p>
-                  <p>
-                    <span>Max Atmosphering Speed: </span> {maxAtmospheringSpeed}
-                  </p>
-                  <p>
-                    <span>Hyperdrive Rating: </span> {hyperdriveRating}
-                  </p>
-                  <p>
-                    <span>MGLT: </span> {MGLT}
-                  </p>
-                  <p>
-                    <span>Cargo Capacity: </span> {cargoCapacity}
-                  </p>
-                  <p>
-                    <span>Consumables: </span> {consumables}
-                  </p>
-                </div>
-              </React.Fragment>
+              <div className="detailsBlock" key={uuid()}>
+                <h1>{name}</h1>
+                <p>
+                  <span>Model: </span> {model}
+                </p>
+                <p>
+                  <span>Starship Class: </span> {starshipClass}
+                </p>
+                <p>
+                  <span>Manufacturers: </span> {manufacturers}
+                </p>
+                <p>
+                  <span>Cost In Credits: </span> {costInCredits}
+                </p>
+                <p>
+                  <span>Length: </span> {length}
+                </p>
+                <p>
+                  <span>Crew: </span> {crew}
+                </p>
+                <p>
+                  <span>Passengers: </span> {passengers}
+                </p>
+                <p>
+                  <span>Max Atmosphering Speed: </span> {maxAtmospheringSpeed}
+                </p>
+                <p>
+                  <span>Hyperdrive Rating: </span> {hyperdriveRating}
+                </p>
+                <p>
+                  <span>MGLT: </span> {MGLT}
+                </p>
+                <p>
+                  <span>Cargo Capacity: </span> {cargoCapacity}
+                </p>
+                <p>
+                  <span>Consumables: </span> {consumables}
+                </p>
+              </div>
             )
           );
         }}

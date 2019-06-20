@@ -13,7 +13,7 @@ const SpDetailsStyle = styled.div`
   }
   & p {
     text-transform: capitalize;
-    line-height: 1.8rem;
+    line-height: 1.2rem;
     margin: 0;
   }
   & .detailsBlock {
@@ -29,7 +29,8 @@ const SpDetailsStyle = styled.div`
     padding: 1rem 2rem 2rem;
     overflow-y: auto;
   }
-  & .detailsBlock h1 {
+  & .detailsBlock h1,
+  h3 {
     margin: 0;
     margin-bottom: 0.5rem;
   }
@@ -62,7 +63,7 @@ function SpeciesDetail({ target }) {
   `;
 
   return (
-    <SpDetailsStyle>
+    <SpDetailsStyle key={uuid()}>
       <Query query={GET_SPECIE}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
@@ -83,7 +84,7 @@ function SpeciesDetail({ target }) {
               eyeColors,
               homeworld
             }) => (
-              <React.Fragment>
+              <React.Fragment key={uuid()}>
                 <div className="detailsBlock" key={id}>
                   <h1>{name}</h1>
                   <p>
@@ -109,22 +110,20 @@ function SpeciesDetail({ target }) {
                   </p>
                 </div>
                 <div className="detailsBlock" key={uuid()}>
-                  <p>
-                    <span>Skin Colors: </span>{" "}
-                    {skinColors ? skinColors.map(e => <p>{e}</p>) : ""}
-                  </p>
+                  <h3>Skin Colors: </h3>{" "}
+                  {skinColors
+                    ? skinColors.map(e => <p key={uuid()}>{e}</p>)
+                    : ""}
                 </div>
                 <div className="detailsBlock" key={uuid()}>
-                  <p>
-                    <span>Eye Colors: </span>{" "}
-                    {eyeColors ? eyeColors.map(e => <p>{e}</p>) : ""}
-                  </p>
+                  <h3>Eye Colors: </h3>{" "}
+                  {eyeColors ? eyeColors.map(e => <p key={uuid()}>{e}</p>) : ""}
                 </div>
                 <div className="detailsBlock" key={uuid()}>
-                  <p>
-                    <span>Hair Colors: </span>{" "}
-                    {hairColors ? hairColors.map(e => <p>{e}</p>) : ""}
-                  </p>
+                  <h3>Hair Colors: </h3>{" "}
+                  {hairColors
+                    ? hairColors.map(e => <p key={uuid()}>{e}</p>)
+                    : ""}
                 </div>
               </React.Fragment>
             )

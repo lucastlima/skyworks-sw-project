@@ -105,7 +105,7 @@ function PersonDetails({ target }) {
               filmConnection,
               starshipConnection
             }) => (
-              <React.Fragment>
+              <React.Fragment key={uuid()}>
                 <div className="detailsBlock" key={uuid()}>
                   <h2>{name}</h2>
                   <p>
@@ -138,7 +138,9 @@ function PersonDetails({ target }) {
                 <div className="detailsBlock" key={uuid()}>
                   <h2>Films</h2>
                   {filmConnection ? (
-                    filmConnection.edges.map(({ node }) => <p>{node.title}</p>)
+                    filmConnection.edges.map(({ node }) => (
+                      <p key={uuid()}>{node.title}</p>
+                    ))
                   ) : (
                     <h2>Test</h2>
                   )}
@@ -147,7 +149,7 @@ function PersonDetails({ target }) {
                   <h2>Starships</h2>
                   {starshipConnection ? (
                     starshipConnection.edges.map(({ node }) => (
-                      <p>{node.name}</p>
+                      <p key={uuid()}>{node.name}</p>
                     ))
                   ) : (
                     <h2>Test</h2>

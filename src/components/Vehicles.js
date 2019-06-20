@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { request } from "graphql-request";
 import VehiclesDetails from "./subcomponents/VehiclesDetails";
 import styled from "styled-components";
+import uuid from "uuid/v4";
 
 const VehicleStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -118,7 +119,7 @@ const Vehicle = () => {
           ))}
         </ul>
       </div>
-      <VehiclesDetails target={targetV} />
+      <VehiclesDetails target={targetV} key={uuid()} />
     </VehicleStyle>
   );
 };

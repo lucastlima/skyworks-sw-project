@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { request } from "graphql-request";
 import PersonDetails from "./subcomponents/PersonDetails";
 import styled from "styled-components";
+import uuid from "uuid/v4";
 
 const PStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -105,7 +106,7 @@ const People = () => {
   );
 
   return (
-    <PStyle>
+    <PStyle key={uuid()}>
       <div className="pplList" key="peoplePanel">
         <ul>
           <div className="searchbox">
@@ -118,7 +119,7 @@ const People = () => {
           ))}
         </ul>
       </div>
-      <PersonDetails target={targetP} />
+      <PersonDetails target={targetP} key={uuid()} />
     </PStyle>
   );
 };

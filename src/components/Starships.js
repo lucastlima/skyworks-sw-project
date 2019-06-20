@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { request } from "graphql-request";
 import StarshipDetails from "./subcomponents/StarshipDetails";
 import styled from "styled-components";
+import uuid from "uuid/v4";
 
 const StarshipStyle = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -118,7 +119,7 @@ const Startship = () => {
           ))}
         </ul>
       </div>
-      <StarshipDetails target={targetSs} />
+      <StarshipDetails target={targetSs} key={uuid()} />
     </StarshipStyle>
   );
 };

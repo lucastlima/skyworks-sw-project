@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import uuid from "uuid/v4";
 
 const VhDetailsStyle = styled.div`
   display: flex;
@@ -60,7 +61,7 @@ function VehiclesDetail({ target }) {
   `;
 
   return (
-    <VhDetailsStyle>
+    <VhDetailsStyle key={uuid()}>
       <Query query={GET_VEHICLE}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
@@ -82,42 +83,40 @@ function VehiclesDetail({ target }) {
               cargoCapacity,
               consumables
             }) => (
-              <React.Fragment>
-                <div className="detailsBlock" key={id}>
-                  <h1>{name}</h1>
-                  <p>
-                    <span>Model: </span>
-                    {model}
-                  </p>
-                  <p>
-                    <span>Vehicle Class: </span> {vehicleClass}
-                  </p>
-                  <p>
-                    <span>Manufacturers: </span> {manufacturers}
-                  </p>
-                  <p>
-                    <span>Cost In Credits: </span> {costInCredits}
-                  </p>
-                  <p>
-                    <span>Length: </span> {length}
-                  </p>
-                  <p>
-                    <span>Crew: </span> {crew}
-                  </p>
-                  <p>
-                    <span>Passengers: </span> {passengers}
-                  </p>
-                  <p>
-                    <span>Max Atmosphering Speed: </span> {maxAtmospheringSpeed}
-                  </p>
-                  <p>
-                    <span>Cargo Capacity: </span> {cargoCapacity}
-                  </p>
-                  <p>
-                    <span>Consumables: </span> {consumables}
-                  </p>
-                </div>
-              </React.Fragment>
+              <div className="detailsBlock" key={uuid()}>
+                <h1>{name}</h1>
+                <p>
+                  <span>Model: </span>
+                  {model}
+                </p>
+                <p>
+                  <span>Vehicle Class: </span> {vehicleClass}
+                </p>
+                <p>
+                  <span>Manufacturers: </span> {manufacturers}
+                </p>
+                <p>
+                  <span>Cost In Credits: </span> {costInCredits}
+                </p>
+                <p>
+                  <span>Length: </span> {length}
+                </p>
+                <p>
+                  <span>Crew: </span> {crew}
+                </p>
+                <p>
+                  <span>Passengers: </span> {passengers}
+                </p>
+                <p>
+                  <span>Max Atmosphering Speed: </span> {maxAtmospheringSpeed}
+                </p>
+                <p>
+                  <span>Cargo Capacity: </span> {cargoCapacity}
+                </p>
+                <p>
+                  <span>Consumables: </span> {consumables}
+                </p>
+              </div>
             )
           );
         }}
